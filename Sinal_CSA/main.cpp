@@ -1,3 +1,7 @@
+/*CRIADO POR DANIEL CAMARGO
+ *LICENSA GPL V.3
+ *CONTATE SE TIVER DUVIDAS*/
+
 #include "SinalAlarme.h"
 #include "Horarios.h"
 
