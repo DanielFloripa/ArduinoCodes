@@ -1,0 +1,34 @@
+void UpdateNoIP(){
+ 
+char noipServer[] = "dynupdate.no-ip.com";
+ 
+  if(client.connect(noipServer, 80)){
+ 
+    Serial.println("Connected to noip");
+ 
+    client.println("GET /nic/update?hostname=SUA_URL_NOIP HTTP/1.0");
+    client.println("Host: dynupdate.no-ip.com");
+    // Esse código louco aqui embaixo é Base64, nele voce coluca seu usuario e senha do NO-IP exemplo: renato@renato.com:123456
+    client.println("Authorization: Basic wrwerwerwrwerwerLWZWOEwerwerwerwerwerwerwerVpSlA=\r\n");
+    client.println("User-Agent: Renato Arduino Client/0.0 renato@renato.com");
+    client.println();
+ 
+    while(client.connected()){    
+      // stay in this loop until the server closes the connection
+ 
+      while(client.available()){
+        // The server will not close the connection until it has sent the last packet
+        // and this buffer is empty
+ 
+        char read_char = client.read(); 
+        Serial.write(read_char);
+      }
+    }
+    // close your end after the server closes its end
+    client.stop();
+    Serial.println("connection closed");
+  }
+  else{
+    Serial.println("connection failed");
+  }
+}

@@ -1,0 +1,18 @@
+#room-list
+  %table
+    %tr
+      %th
+        Room
+      %th
+        Occupied?
+      %th
+        Next Meeting
+    - @rooms.each do |r|
+      %tr
+        %td
+          = r.room_name
+        %td
+          = (r.next_start && r.next_end && r.next_start <= Time.now && r.next_end > Time.now) ? "Yes" : "No"
+        %td
+          = (r.next_start && r.next_start > Time.now) ? r.next_start.localtime.strftime("%I:%M%p %m/%d") : r.next_next_start ? r.next_next_start.localtime.strftime("%I:%M%p %m/%d") : "N/A"
+
